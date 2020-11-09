@@ -1,9 +1,9 @@
 window.addEventListener('DOMContentLoaded', () => {
 
-const deadine = '2020-12-31';
+const deadine = '2021-03-27';
 
 const getTimeRemaining = (endtime) => {
-    const t = Date.parse(endtime) - Date.parse(new Date()); //превращаем строку даты во что-то числовое
+    const t = Date.parse(endtime) - Date.parse(new Date()); //превращаем строку даты во что-то числовое ms
     const days = Math.floor(t / (1000 * 60 * 60 * 24)); //ms в дни
     const hours = Math.floor((t / (1000 * 60 * 60) % 24)); //ms в часы
     const minutes = Math.floor((t / (1000 * 60)) % 60);
@@ -11,21 +11,12 @@ const getTimeRemaining = (endtime) => {
 
     return {
         'total': t,
-        'days': days,
-        'hours': hours,
-        'minutes': minutes,
-        'seconds': seconds
+        days,
+        hours,
+        minutes,
+        seconds
         };
     };
-
-//подставление нуля
-function getZero(num) {
-    if (num >= 0 && num < 10) {
-        return `0${num}`;
-    } else {
-        return num;
-    }
-}
 
 const setClock = (selector, endtime) => {
     const timer = document.querySelector(selector);
@@ -51,6 +42,15 @@ const setClock = (selector, endtime) => {
         }
     }
 };
+
+//подставление нуля
+function getZero(num) {
+    if (num >= 0 && num < 10) {
+        return `0${num}`;
+    } else {
+        return num;
+    }
+}
 
 setClock('.timer', deadine);
 
