@@ -22,20 +22,23 @@ window.addEventListener('DOMContentLoaded', () => {
     
         createCard() {
 
-            const card = `
-                <div class="menu__item">
+            const card = document.createElement('div');
+            card.className = 'menu__item';
+
+            card.insertAdjacentHTML ('afterbegin', `
+                
                     <img src=img/tabs/${this.img} alt="${this.img}">
-                        <h3 class="menu__item-subtitle">${this.title}</h3>
-                        <div class="menu__item-descr">${this.description}</div>
-                        <div class="menu__item-divider"></div>
-                        <div class="menu__item-price">
-                            <div class="menu__item-cost">Цена:</div>
-                            <div class="menu__item-total"><span>${this.price}</span> руб./день</div>
-                        </div>
-                </div> 
-            `;
-    
-            divCards.insertAdjacentHTML('beforeend', card);
+                    <h3 class="menu__item-subtitle">${this.title}</h3>
+                    <div class="menu__item-descr">${this.description}</div>
+                    <div class="menu__item-divider"></div>
+                    <div class="menu__item-price">
+                        <div class="menu__item-cost">Цена:</div>
+                        <div class="menu__item-total"><span>${this.price}</span> руб./день</div>
+                    </div>
+                
+            `);
+
+            divCards.insertAdjacentElement('beforeend', card);
         };
             
 
