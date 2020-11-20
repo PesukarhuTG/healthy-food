@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', () => {
+const setTimer = () => {
 
 const deadine = '2021-03-27';
 
@@ -54,4 +54,6 @@ function getZero(num) {
 
 setClock('.timer', deadine);
 
-});
+}
+
+export default setTimer;

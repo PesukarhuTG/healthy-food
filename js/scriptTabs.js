@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', () => {
+const generateTabs = () => {
 
     const tabs = document.querySelectorAll('.tabheader__item');
     const tabsContent = document.querySelectorAll('.tabcontent');
@@ -42,6 +42,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
     });
 
+}
 
-});
+export default generateTabs;
+
 

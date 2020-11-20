@@ -1,6 +1,6 @@
 //generate cards via Class (ES6)
 
-window.addEventListener('DOMContentLoaded', () => {
+const generateGoodsCards = () => {
 
     const divCards = document.querySelector('.menu-container');
 
@@ -62,4 +62,6 @@ window.addEventListener('DOMContentLoaded', () => {
         15, 
         'post.jpg');
 
-});
+}
+
+export default generateGoodsCards;
