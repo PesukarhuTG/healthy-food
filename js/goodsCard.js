@@ -1,18 +1,17 @@
 //generate cards via Class (ES6)
-
 const generateGoodsCards = () => {
 
     const divCards = document.querySelector('.menu-container');
 
     class MenuCard {
-        constructor ( title, description, price, img) {
+        constructor ( img, altimg, title, descr, price) {
             this.img = img;
+            this.altimg = altimg;
             this.title = title;
-            this.description = description;
+            this.descr = descr;
             this.price = price;
             this.transfer = 77; // exchange course $ to Rub
             this.cnahgeToRub();
-            this.createCard();
         }
 
         cnahgeToRub() {
@@ -20,16 +19,16 @@ const generateGoodsCards = () => {
         }
 
     
-        createCard() {
+        render() {
 
             const card = document.createElement('div');
             card.className = 'menu__item';
 
             card.insertAdjacentHTML ('afterbegin', `
                 
-                    <img src=img/tabs/${this.img} alt="${this.img}">
+                    <img src=img/tabs/${this.img} alt="${this.altimg}">
                     <h3 class="menu__item-subtitle">${this.title}</h3>
-                    <div class="menu__item-descr">${this.description}</div>
+                    <div class="menu__item-descr">${this.descr}</div>
                     <div class="menu__item-divider"></div>
                     <div class="menu__item-price">
                         <div class="menu__item-cost">Цена:</div>
@@ -40,28 +39,24 @@ const generateGoodsCards = () => {
 
             divCards.insertAdjacentElement('beforeend', card);
         };
-            
+    }
 
+    //получение данных с сервера
+    const getResource = async (url) => {
+        let result = await fetch(url);
+
+        if (!result.ok) {
+            throw new Error(`Could not fetch ${url}, status ${result.status}`);
         }
+        return await result.json();
+    };
 
-    new MenuCard (
-        'Меню "Фитнес"', 
-        'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!', 
-        10, 
-        'vegy.jpg');
-
-    new MenuCard (
-        'Меню "Премиум"', 
-        'В меню "Премиум" мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!', 
-        20, 
-        'elite.jpg');
-
-    new MenuCard (
-        'Меню "Постное"', 
-        'Меню "Постное" - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.', 
-        15, 
-        'post.jpg');
-
+    getResource('http://localhost:3000/menu')
+        .then(data => {
+            data.forEach(({ img, altimg, title, descr, price }) => {
+                new MenuCard(img, altimg, title, descr, price).render();
+            });
+        });
 }
 
 export default generateGoodsCards;
