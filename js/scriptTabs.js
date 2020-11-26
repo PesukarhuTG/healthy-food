@@ -10,7 +10,7 @@ const generateTabs = () => {
             item.classList.add('hide');
             item.classList.remove('show', 'fade');
         });
- 
+
         tabs.forEach(tab => {
             tab.classList.remove('tabheader__item_active');
         });
