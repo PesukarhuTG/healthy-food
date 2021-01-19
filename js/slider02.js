@@ -55,7 +55,7 @@ const createSlider02 = () => {
         dot.classList.add('dot');
 
         if (i == 0) {
-            dot.style.opacity = 1;
+            dot.style.opacity = '1';
         }
 
         indicators.append(dot);
@@ -67,12 +67,17 @@ const createSlider02 = () => {
         dots[slideIndex - 1].style.opacity = '1';
     }
 
+    function deleteNotDigits(str) {
+        return +str.replace(/\D/g, '') //чтобы 500рх превратить в 500
+    }
+
+
 
     next02.addEventListener('click', () => {
-        if (offset == (+width.slice(0, width.length - 2) * (slides02.length - 1))) { //чтобы 500рх превратить в 500
+        if (offset == (deleteNotDigits(width) * (slides02.length - 1))) { //чтобы 500рх превратить в 500
             offset = 0;
         } else {
-            offset += +width.slice(0, width.length - 2);
+            offset += deleteNotDigits(width);
         }
 
         slidesField.style.transform = `translateX(-${offset}px)`;
@@ -92,9 +97,9 @@ const createSlider02 = () => {
     prev02.addEventListener('click', () => {
 
         if (offset == 0) {
-            offset = +width.slice(0, width.length - 2) * (slides02.length - 1);
+            offset = deleteNotDigits(width) * (slides02.length - 1);
         } else {
-            offset -= +width.slice(0, width.length - 2);
+            offset -= deleteNotDigits(width);
         }
 
         slidesField.style.transform = `translateX(-${offset}px)`;
@@ -113,12 +118,12 @@ const createSlider02 = () => {
     });
 
     dots.forEach(dot => {
-        dot.addEventListener('click', e => {
+        dot.addEventListener('click', e => { 
             const slideTo = e.target.getAttribute('data-slide-to');
             slideIndex = slideTo;
 
             //change img
-            offset = +width.slice(0, width.length - 2) * (slideTo - 1);
+            offset = deleteNotDigits(width) * (slideTo - 1);
             slidesField.style.transform = `translateX(-${offset}px)`;
 
             //change current number of slide
