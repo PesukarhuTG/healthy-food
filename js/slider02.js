@@ -8,6 +8,8 @@ const createSlider02 = () => {
     const slidesField = document.querySelector('.offer__slider-inner');
     const width = window.getComputedStyle(slidesWrapper).width;
 
+    const slider = document.querySelector('.offer__slider_second');
+
     //счетчик слайдов
     let slideIndex = 1;
 
@@ -38,6 +40,34 @@ const createSlider02 = () => {
         item.style.width = width;
     })
 
+    //dots
+    slider.style.position = 'relative';
+    
+    const indicators = document.createElement('ol');
+    const dots = [];
+
+    indicators.classList.add('carousel-indicators');
+    slider.append(indicators);
+
+    for (let i = 0; i < slides02.length; i++) {
+        let dot = document.createElement('li');
+        dot.setAttribute('data-slide-to', i + 1);
+        dot.classList.add('dot');
+
+        if (i == 0) {
+            dot.style.opacity = 1;
+        }
+
+        indicators.append(dot);
+        dots.push(dot); //create dots and push them to the array
+    }
+
+    function changeActiveStatusOfDots() {
+        dots.forEach(dot => dot.style.opacity = '0.5');
+        dots[slideIndex - 1].style.opacity = '1';
+    }
+
+
     next02.addEventListener('click', () => {
         if (offset == (+width.slice(0, width.length - 2) * (slides02.length - 1))) { //чтобы 500рх превратить в 500
             offset = 0;
@@ -54,6 +84,9 @@ const createSlider02 = () => {
         }
 
         current02.innerHTML = getZero(slideIndex);
+
+        //change active status for dots
+        changeActiveStatusOfDots();
     });
 
     prev02.addEventListener('click', () => {
@@ -74,7 +107,28 @@ const createSlider02 = () => {
 
         current02.innerHTML = getZero(slideIndex);
 
+        //change active status for dots
+        changeActiveStatusOfDots();
+
     });
+
+    dots.forEach(dot => {
+        dot.addEventListener('click', e => {
+            const slideTo = e.target.getAttribute('data-slide-to');
+            slideIndex = slideTo;
+
+            //change img
+            offset = +width.slice(0, width.length - 2) * (slideTo - 1);
+            slidesField.style.transform = `translateX(-${offset}px)`;
+
+            //change current number of slide
+            current02.innerHTML = getZero(slideIndex);
+
+            //change active status of dots
+            changeActiveStatusOfDots();
+
+        })
+    })
 
 }
 
