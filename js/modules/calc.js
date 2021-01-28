@@ -1,4 +1,4 @@
-const createCalculator = () => {
+function calc() {
 
     const result = document.querySelector('.calculating__result span');
 
@@ -123,4 +123,4 @@ const createCalculator = () => {
 
 }
 
-export default createCalculator;
+module.exports = calc;

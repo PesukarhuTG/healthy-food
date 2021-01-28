@@ -1,4 +1,5 @@
-const createSlider = () => {
+function slider01() {
+
     const slides = document.querySelectorAll('.offer__slide');
     const prev = document.querySelector('.offer__slider-prev');
     const next = document.querySelector('.offer__slider-next');
@@ -50,8 +51,7 @@ const createSlider = () => {
         plusSlides(1)
     });
 
-    
 
 }
 
-export default createSlider;
+module.exports = slider01;

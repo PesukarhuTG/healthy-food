@@ -1,5 +1,4 @@
-const generateTabs = () => {
-
+function tabs() {
     const tabs = document.querySelectorAll('.tabheader__item');
     const tabsContent = document.querySelectorAll('.tabcontent');
     const tabsParent = document.querySelector('.tabcontainer');
@@ -41,9 +40,6 @@ const generateTabs = () => {
         }
 
     });
-
 }
 
-export default generateTabs;
-
-
+module.exports = tabs;

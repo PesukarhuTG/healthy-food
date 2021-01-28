@@ -1,5 +1,4 @@
-//generate cards via Class (ES6)
-const generateGoodsCards = () => {
+function cards() {
 
     const divCards = document.querySelector('.menu-container');
 
@@ -65,6 +64,7 @@ const generateGoodsCards = () => {
                 });
                 
             });
+
 }
 
-export default generateGoodsCards;
+module.exports = cards;
