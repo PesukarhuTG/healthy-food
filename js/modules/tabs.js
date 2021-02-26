@@ -1,7 +1,7 @@
-function tabs() {
-    const tabs = document.querySelectorAll('.tabheader__item');
-    const tabsContent = document.querySelectorAll('.tabcontent');
-    const tabsParent = document.querySelector('.tabcontainer');
+function tabs(tabsSelector, tabsContentSelector, tabsParentSelector, activeClass) {
+    const tabs = document.querySelectorAll(tabsSelector);
+    const tabsContent = document.querySelectorAll(tabsContentSelector);
+    const tabsParent = document.querySelector(tabsParentSelector);
 
     // ф-ция скрытия ненужных табов
     const hideTabContent = () => {
@@ -11,7 +11,7 @@ function tabs() {
         });
 
         tabs.forEach(tab => {
-            tab.classList.remove('tabheader__item_active');
+            tab.classList.remove(activeClass);
         });
     };
 
@@ -19,7 +19,7 @@ function tabs() {
     const showTabContent = (i = 0) => {
         tabsContent[i].classList.add('show', 'fade');
         tabsContent[i].classList.remove('hide');
-        tabs[i].classList.add('tabheader__item_active');
+        tabs[i].classList.add(activeClass);
     };
 
     hideTabContent();
@@ -29,7 +29,7 @@ function tabs() {
     tabsParent.addEventListener('click', (e) => {
         const target = e.target;
 
-        if (target && target.classList.contains('tabheader__item')) {
+        if (target && target.classList.contains(tabsSelector.slice(1))) {
             tabs.forEach((item, i) => { //определяем номер таба, по ктр-му кликнули и по его номеру отображаем контент
                 if (target === item) { //если элемент псевдомасива tabs совпадает с эл-том, куда кликнул пользователь
                     hideTabContent();
@@ -42,4 +42,4 @@ function tabs() {
     });
 }
 
-module.exports = tabs;
+export default tabs;

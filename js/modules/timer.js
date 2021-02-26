@@ -1,6 +1,4 @@
-function timer() {
-
-    const deadine = '2021-05-30';
+function timer(id, deadline) {
 
     const getTimeRemaining = (endtime) => {
         const t = Date.parse(endtime) - Date.parse(new Date()); //превращаем строку даты во что-то числовое ms
@@ -52,8 +50,8 @@ function timer() {
         }
     }
 
-    setClock('.timer', deadine);
+    setClock(id, deadline);
 
 }
 
-module.exports = timer;
+export default timer;

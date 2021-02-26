@@ -1,21 +1,20 @@
-function slider02() {
-
-    const slides02 = document.querySelectorAll('.offer__slide_second');
-    const prev02 = document.querySelector('.offer__slider-prev_second');
-    const next02 = document.querySelector('.offer__slider-next_second');
-    const current02 = document.querySelector('#current_second');
-    const total02 = document.querySelector('#total_second');
-    const slidesWrapper = document.querySelector('.offer__slider-wrapper_second');
-    const slidesField = document.querySelector('.offer__slider-inner');
-    const width = window.getComputedStyle(slidesWrapper).width;
-
-    const slider = document.querySelector('.offer__slider_second');
+function slider02({container, slide, nextArrow, prevArrow, 
+    totalCounter, currentCounter, wrapper, field}) {
 
     //счетчик слайдов
     let slideIndex = 1;
-
     let offset = 0;
 
+    const slides02 = document.querySelectorAll(slide);
+    const slider = document.querySelector(container);
+    const prev02 = document.querySelector(prevArrow);
+    const next02 = document.querySelector(nextArrow);
+    const total02 = document.querySelector(totalCounter);
+    const current02 = document.querySelector(currentCounter);
+    const slidesWrapper = document.querySelector(wrapper);
+    const width = window.getComputedStyle(slidesWrapper).width;
+    const slidesField = document.querySelector(field);
+    
      //подставление нуля
     function getZero(num) {
         if (num >= 0 && num < 10) {
@@ -139,4 +138,4 @@ function slider02() {
 
 }
 
-module.exports = slider02;
+export default slider02;
